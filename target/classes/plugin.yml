@@ -1,0 +1,6 @@
+name: WynCore
+version: '1.0-SNAPSHOT'
+main: org.wyncore.WynCore
+api-version: '1.20.6'
+authors: [ WynCore ]
+description: Core of plugins
