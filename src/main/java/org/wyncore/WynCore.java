@@ -2,7 +2,6 @@ package org.wyncore;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.wyncore.API.SpawnPointAPI;
 import org.wyncore.Framework.Command.Core.CommandFramework;
 import org.wyncore.Framework.ConfigAPI;
@@ -21,12 +20,6 @@ public final class WynCore extends JavaPlugin {
     private InventoryAPI inventoryAPI;
     private ItemNBT itemNBT;
 
-    public static int temp = 0;
-
-    public static int getTemp() {
-        return temp;
-    }
-
     @Override
     public void onEnable() {
         GuiAPI.init(this);
@@ -38,13 +31,6 @@ public final class WynCore extends JavaPlugin {
         commandFramework.scan("org.wyncore.Commands");
         SpawnPointAPI.LoadLocations();
         RegisterListeners();
-        Bukkit.getScheduler().runTaskTimer(this, new Runnable() {
-            @Override
-            public void run() {
-                temp = temp + 1;
-                getLogger().info(temp + "");
-            }
-        },10*20L, 20L);
 
     }
 

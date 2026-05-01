@@ -7,11 +7,8 @@ import org.wyncore.Framework.Command.Annotation.CommandInfo;
 import org.wyncore.Framework.Command.Annotation.DefaultCommand;
 import org.wyncore.Framework.Command.Core.CommandContext;
 import org.wyncore.Framework.MenuGUI.*;
-import org.wyncore.WynCore;
 
 import java.util.List;
-
-import static org.wyncore.Framework.MenuGUI.GuiAPI.plugin;
 
 @CommandInfo(
         name = "testing",
@@ -33,8 +30,7 @@ public class CommandTeste {
                 session -> ItemBuilder.of(Material.EMERALD)
                         .name("§aPerfil")
                         .lore(
-                                "§7Jogador: §f" + session.player().getName(),
-                                "§eTempo: §f" + WynCore.getTemp()
+                                "§7Jogador: §f" + session.player().getName()
                         )
                         .build(),
                 click -> click.player().sendMessage("§aSeu perfil foi atualizado.")
