@@ -162,6 +162,7 @@ public class CommandFramework {
         try {
 
             List<Object> values = new ArrayList<>();
+            int argIndex = 0;
 
             for (Class<?> param : method.getParameterTypes()) {
 
@@ -170,14 +171,33 @@ public class CommandFramework {
                     continue;
                 }
 
-                sender.sendMessage("§cInvalid parameter in the standard command..");
-                return;
+                ArgumentResolver<?> resolver = arguments().get(param);
+
+                if (resolver == null) {
+                    sender.sendMessage("§cTipo não suportado: " + param.getSimpleName());
+                    return;
+                }
+
+                if (argIndex >= args.length) {
+                    sender.sendMessage("§cUso incorreto.");
+                    return;
+                }
+
+                Object value = resolver.resolve(sender, args[argIndex]);
+
+                if (value == null) {
+                    sender.sendMessage("§cArgumento inválido: " + args[argIndex]);
+                    return;
+                }
+
+                values.add(value);
+                argIndex++;
             }
 
             method.invoke(instance, values.toArray());
 
         } catch (Exception e) {
-            sender.sendMessage("§cError executing command.");
+            sender.sendMessage("§cErro ao executar comando.");
             e.printStackTrace();
         }
     }
