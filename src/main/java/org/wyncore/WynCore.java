@@ -3,7 +3,7 @@ package org.wyncore;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.wyncore.API.SpawnPointAPI;
-import org.wyncore.Framework.Command.Core.CommandFramework;
+import org.wyncore.Framework.Command.CommandFramework;
 import org.wyncore.Framework.ConfigAPI;
 import org.wyncore.Framework.ItemBuilder.InventoryAPI;
 import org.wyncore.Framework.ItemBuilder.ItemAPI;
@@ -14,33 +14,28 @@ import org.wyncore.Listeners.PlayerJoinEvent;
 public final class WynCore extends JavaPlugin {
 
     public static WynCore getInstance;
-    private CommandFramework commandFramework;
     ConfigAPI SpawnPoint = ConfigAPI.create(this,"SpawnPoint.yml");
     private ItemAPI itemAPI;
     private InventoryAPI inventoryAPI;
     private ItemNBT itemNBT;
+    private CommandFramework commandFramework;
 
     @Override
     public void onEnable() {
         GuiAPI.init(this);
         getInstance = this;
+        commandFramework = new CommandFramework(this);
         inventoryAPI = new InventoryAPI(this);
         itemAPI = new ItemAPI(this);
         itemNBT = new ItemNBT(this);
-        commandFramework = new CommandFramework(this);
-        commandFramework.scan("org.wyncore.Commands");
         SpawnPointAPI.LoadLocations();
         RegisterListeners();
-
     }
 
     @Override
     public void onDisable() {
     }
 
-    public CommandFramework getCommandFramework() {
-        return commandFramework;
-    }
 
     public void RegisterListeners(){
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoinEvent(),this);

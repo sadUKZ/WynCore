@@ -1,4 +1,4 @@
-package org.wyncore.Framework.Command.Core;
+package org.wyncore.Framework.Command;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -19,7 +19,7 @@ public class CommandContext {
         return sender;
     }
 
-    public Player getPlayer() {
+    public Player player() {
         return sender instanceof Player player ? player : null;
     }
 
