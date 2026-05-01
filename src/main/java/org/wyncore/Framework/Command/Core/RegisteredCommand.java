@@ -48,13 +48,12 @@ public class RegisteredCommand extends Command {
             return true;
         }
 
+        if (defaultMethod != null) {
+            framework.invokeDefault(sender, label, args, commandInstance, defaultMethod);
+            return true;
+        }
+
         if (args.length == 0) {
-
-            if (defaultMethod != null) {
-                framework.invokeDefault(sender, label, args, commandInstance, defaultMethod);
-                return true;
-            }
-
             sendHelp(sender, label);
             return true;
         }
